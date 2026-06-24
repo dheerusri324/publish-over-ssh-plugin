@@ -68,6 +68,9 @@
         <f:entry title="${m.timeout()}" field="timeout">
             <f:textbox default="${descriptor.defaultTimeout}"/>
         </f:entry>
+        <f:entry title="${%sftpPipelineDepth}" field="sftpPipelineDepth">
+            <f:textbox default="${descriptor.defaultSftpPipelineDepth}" clazz="number"/>
+        </f:entry>
         <f:entry title="${%disableExec}" field="disableExec">
             <f:checkbox/>
         </f:entry>

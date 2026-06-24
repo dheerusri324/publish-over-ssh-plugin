@@ -65,6 +65,14 @@ public class BapSshHostConfigurationDescriptor extends Descriptor<BapSshHostConf
       return BapSshHostConfiguration.DEFAULT_AVOID_SAME_FILES_UPLOAD;
     }
 
+    public int getDefaultSftpPipelineDepth() {
+        return BapSshHostConfiguration.DEFAULT_SFTP_PIPELINE_DEPTH;
+    }
+
+    public FormValidation doCheckSftpPipelineDepth(@QueryParameter final String value) {
+        return FormValidation.validatePositiveInteger(value);
+    }
+
     public FormValidation doCheckName(@QueryParameter final String value) {
         return BPValidators.validateName(value);
     }

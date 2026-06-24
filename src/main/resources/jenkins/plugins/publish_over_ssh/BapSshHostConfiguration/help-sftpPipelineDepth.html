@@ -1,0 +1,8 @@
+
+<div>
+    <p>Number of concurrent SFTP requests that can be in-flight (sent but not yet acknowledged by the server) during file transfers.</p>
+    <p>Increasing this value improves transfer throughput significantly, especially on high-bandwidth or high-latency links,
+       by keeping the network pipe full of data instead of waiting for each chunk to be acknowledged individually.</p>
+    <p>Default: <strong>64</strong>. The library minimum is 1 (fully synchronous). Values above 128 may increase memory usage
+       without meaningful throughput gains on most networks.</p>
+</div>

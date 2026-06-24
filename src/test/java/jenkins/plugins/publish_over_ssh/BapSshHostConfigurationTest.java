@@ -126,6 +126,7 @@ class BapSshHostConfigurationTest {
         mockSession.setConfig((Properties) anyObject());
         mockSession.connect(getHostConfig().getTimeout());
         expect(mockSession.openChannel("sftp")).andReturn(mockSftp);
+        mockSftp.setBulkRequests(64);
         mockSftp.connect(getHostConfig().getTimeout());
         testHelper.expectDirectoryCheck(getHostConfig().getRemoteRootDir(), true);
         mockSftp.cd(getHostConfig().getRemoteRootDir());
@@ -153,6 +154,7 @@ class BapSshHostConfigurationTest {
         mockSession.setConfig((Properties) anyObject());
         mockSession.connect(getHostConfig().getTimeout());
         expect(mockSession.openChannel("sftp")).andReturn(mockSftp);
+        mockSftp.setBulkRequests(64);
         mockSftp.connect(getHostConfig().getTimeout());
         testHelper.expectDirectoryCheck(getHostConfig().getRemoteRootDir(), true);
         mockSftp.cd(getHostConfig().getRemoteRootDir());
@@ -181,6 +183,7 @@ class BapSshHostConfigurationTest {
         mockSession.setConfig((Properties) anyObject());
         mockSession.connect(getHostConfig().getTimeout());
         expect(mockSession.openChannel("sftp")).andReturn(mockSftp);
+        mockSftp.setBulkRequests(64);
         mockSftp.connect(getHostConfig().getTimeout());
         testHelper.expectDirectoryCheck(getHostConfig().getRemoteRootDir(), true);
         mockSftp.cd(getHostConfig().getRemoteRootDir());
@@ -206,6 +209,7 @@ class BapSshHostConfigurationTest {
         mockSession.setConfig((Properties) anyObject());
         mockSession.connect(getHostConfig().getTimeout());
         expect(mockSession.openChannel("sftp")).andReturn(mockSftp);
+        mockSftp.setBulkRequests(64);
         mockSftp.connect(getHostConfig().getTimeout());
         testHelper.expectDirectoryCheck(getHostConfig().getRemoteRootDir(), true);
         mockSftp.cd(getHostConfig().getRemoteRootDir());
@@ -223,6 +227,7 @@ class BapSshHostConfigurationTest {
         mockSession.setConfig((Properties) anyObject());
         mockSession.connect(getHostConfig().getTimeout());
         expect(mockSession.openChannel("sftp")).andReturn(mockSftp);
+        mockSftp.setBulkRequests(64);
         mockSftp.connect(getHostConfig().getTimeout());
         testHelper.expectDirectoryCheck(getHostConfig().getRemoteRootDir(), true);
         mockSftp.cd(getHostConfig().getRemoteRootDir());
@@ -246,6 +251,7 @@ class BapSshHostConfigurationTest {
         mockSession.setConfig((Properties) anyObject());
         mockSession.connect(getHostConfig().getTimeout());
         expect(mockSession.openChannel("sftp")).andReturn(mockSftp);
+        mockSftp.setBulkRequests(64);
         mockSftp.connect(getHostConfig().getTimeout());
         testHelper.expectDirectoryCheck(getHostConfig().getRemoteRootDir(), true);
         mockSftp.cd(getHostConfig().getRemoteRootDir());
@@ -264,6 +270,7 @@ class BapSshHostConfigurationTest {
         mockSession.setConfig((Properties) anyObject());
         mockSession.connect(getHostConfig().getTimeout());
         expect(mockSession.openChannel("sftp")).andReturn(mockSftp);
+        mockSftp.setBulkRequests(64);
         mockSftp.connect(getHostConfig().getTimeout());
         testHelper.expectDirectoryCheck(getHostConfig().getRemoteRootDir(), true);
         mockSftp.cd(getHostConfig().getRemoteRootDir());
@@ -283,6 +290,7 @@ class BapSshHostConfigurationTest {
         mockSession.connect(getHostConfig().getTimeout());
         expect(mockSession.openChannel("sftp")).andReturn(mockSftp);
         final JSchException exception = new JSchException("meh");
+        mockSftp.setBulkRequests(64);
         mockSftp.connect(getHostConfig().getTimeout());
         expectLastCall().andThrow(exception);
         expectDisconnect();
@@ -394,6 +402,7 @@ class BapSshHostConfigurationTest {
         mockSession.setConfig((Properties) anyObject());
         mockSession.connect(getHostConfig().getTimeout());
         expect(mockSession.openChannel("sftp")).andReturn(mockSftp);
+        mockSftp.setBulkRequests(64);
         mockSftp.connect(getHostConfig().getTimeout());
         testHelper.expectDirectoryCheck(getHostConfig().getRemoteRootDir(), true);
         mockSftp.cd(getHostConfig().getRemoteRootDir());
@@ -413,6 +422,7 @@ class BapSshHostConfigurationTest {
         mockSession.setConfig((Properties) anyObject());
         mockSession.connect(getHostConfig().getTimeout());
         expect(mockSession.openChannel("sftp")).andReturn(mockSftp);
+        mockSftp.setBulkRequests(64);
         mockSftp.connect(getHostConfig().getTimeout());
         testHelper.expectDirectoryCheck(getHostConfig().getRemoteRootDir(), true);
         mockSftp.cd(getHostConfig().getRemoteRootDir());
@@ -432,6 +442,7 @@ class BapSshHostConfigurationTest {
         mockSession.setConfig((Properties) anyObject());
         mockSession.connect(getHostConfig().getTimeout());
         expect(mockSession.openChannel("sftp")).andReturn(mockSftp);
+        mockSftp.setBulkRequests(64);
         mockSftp.connect(getHostConfig().getTimeout());
         testHelper.expectDirectoryCheck(getHostConfig().getRemoteRootDir(), true);
         mockSftp.cd(getHostConfig().getRemoteRootDir());

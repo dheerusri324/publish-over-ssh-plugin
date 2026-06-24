@@ -63,6 +63,7 @@ public class BapSshHostConfiguration extends BPHostConfiguration<BapSshClient, B
     public static final String SOCKS_5_PROXY_TYPE = "socks5";
 
     public static final boolean DEFAULT_AVOID_SAME_FILES_UPLOAD = false;
+    public static final int DEFAULT_SFTP_PIPELINE_DEPTH = 64;
 
     private int timeout;
     private boolean overrideKey;
@@ -81,6 +82,7 @@ public class BapSshHostConfiguration extends BPHostConfiguration<BapSshClient, B
     private Secret secretProxyPassword;
 
     private boolean avoidSameFileUploads;
+    private int sftpPipelineDepth;
 
     public BapSshHostConfiguration() {
         // use this constructor instead of the default w/o parameters because there is some
@@ -241,6 +243,15 @@ public class BapSshHostConfiguration extends BPHostConfiguration<BapSshClient, B
       return avoidSameFileUploads;
     }
 
+    public int getSftpPipelineDepth() {
+        return sftpPipelineDepth;
+    }
+
+    @DataBoundSetter
+    public void setSftpPipelineDepth(final int sftpPipelineDepth) {
+        this.sftpPipelineDepth = sftpPipelineDepth;
+    }
+
     @Override
     public Object readResolve() {
         if(StringUtils.isNotEmpty(proxyPassword)) {
@@ -339,6 +350,13 @@ public class BapSshHostConfiguration extends BPHostConfiguration<BapSshClient, B
         final BPBuildInfo buildInfo = bapClient.getBuildInfo();
         final ChannelSftp sftp = openSftpChannel(buildInfo, bapClient.getSession());
         bapClient.setSftp(sftp);
+        final int pipelineDepth = getSftpPipelineDepth() > 0 ? getSftpPipelineDepth() : DEFAULT_SFTP_PIPELINE_DEPTH;
+        try {
+            sftp.setBulkRequests(pipelineDepth);
+            buildInfo.printIfVerbose(Messages.console_sftp_pipelineDepth(pipelineDepth));
+        } catch (JSchException jse) {
+            LOG.warn(Messages.console_sftp_pipelineDepth_failed(pipelineDepth, jse.getLocalizedMessage()), jse);
+        }
         connectSftpChannel(buildInfo, sftp);
         changeToRootDirectory(bapClient);
         setRootDirectoryInClient(bapClient, sftp);
@@ -484,7 +502,8 @@ public class BapSshHostConfiguration extends BPHostConfiguration<BapSshClient, B
                 .append(proxyPort, that.proxyPort)
                 .append(proxyUser, that.proxyUser)
                 .append(secretProxyPassword, that.secretProxyPassword)
-                .append(avoidSameFileUploads, that.avoidSameFileUploads);
+                .append(avoidSameFileUploads, that.avoidSameFileUploads)
+                .append(sftpPipelineDepth, that.sftpPipelineDepth);
     }
 
     @Override
@@ -500,7 +519,8 @@ public class BapSshHostConfiguration extends BPHostConfiguration<BapSshClient, B
                 .append(proxyPort)
                 .append(proxyUser)
                 .append(secretProxyPassword.getPlainText())
-                .append(avoidSameFileUploads);
+                .append(avoidSameFileUploads)
+                .append(sftpPipelineDepth);
     }
 
     @Override
@@ -516,7 +536,8 @@ public class BapSshHostConfiguration extends BPHostConfiguration<BapSshClient, B
                 .append("proxyPort", proxyPort)
                 .append("proxyUser", proxyUser)
                 .append("proxyPassword", "xxxxxxx")
-                .append("avoidSameFileUploads", avoidSameFileUploads);
+                .append("avoidSameFileUploads", avoidSameFileUploads)
+                .append("sftpPipelineDepth", sftpPipelineDepth);
     }
 
     @Override
